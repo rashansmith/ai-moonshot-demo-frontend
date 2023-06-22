@@ -12,8 +12,7 @@ matplotlib.use('agg')
 app = Flask(__name__)
 sheets = pd.read_excel('Moonshot Tracker Results.xlsx', sheet_name=None)
 
-load_dotenv()
-API_KEY = os.environ['OPENAI_API_KEY']
+API_KEY =  "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"
 llm = OpenAI(api_token=API_KEY)
 pandas_ai = PandasAI(llm, save_charts=True)
 
