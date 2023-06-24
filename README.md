@@ -8,6 +8,7 @@ The frontend is built using [Next.JS](https://nextjs.org/), a React framework.
 
 ### Technology Pre-requisites
 - Node: https://nodejs.org/en/download
+- Npm: https://docs.npmjs.com/downloading-and-installing-node-js-and-npm
 
 
 ### Running the app locally
