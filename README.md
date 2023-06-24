@@ -30,6 +30,6 @@ npm run dev
 The app will be running at [http://localhost:3000](http://localhost:3000) in your browser.
 
 ## Demo Status:
-Main Page: <img width="1388" alt="Demo_front_page_mvp" src="https://github.com/rashansmith/ai-moonshot-demo-frontend/assets/6632748/d61d3abd-ea33-4637-b967-41f85e732091">
+Main Page: <img width="1388" alt="Demo_front_page_mvp" src="https://github.com/rashansmith/ai-moonshot-demo-frontend/assets/6632748/38bb388b-909e-4c59-8df0-af239359d959">
 
 
