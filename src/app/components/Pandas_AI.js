@@ -74,8 +74,8 @@ export default function YourComponent({ data }) {
                                     <img
                                         src={`data:image/jpeg;base64,${data.image}`} 
                                         alt="Base64 Image"   
-                                        width={800}
-                                        height={1000}/>
+                                        width={500}
+                                        height={5000}/>
                                 </div>
                             ) :
                                 <p>Loading results...</p> 
