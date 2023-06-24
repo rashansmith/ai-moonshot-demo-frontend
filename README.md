@@ -1,8 +1,8 @@
 
-# Demo - FrontEnd
+# Demo - Frontend
 
 ## Overview
-The repo contains the front-end for the AI Moonshot platform demo. 
+The repo contains the front-end for the platform demo. 
 
 The frontend is built using [Next.JS](https://nextjs.org/), a React framework.
 
@@ -28,6 +28,7 @@ npm run dev
 
 The app will be running at [http://localhost:3000](http://localhost:3000) in your browser.
 
-
+## Demo Status:
+Main Page: <img width="1388" alt="Demo_front_page_mvp" src="https://github.com/rashansmith/ai-moonshot-demo-frontend/assets/6632748/d61d3abd-ea33-4637-b967-41f85e732091">
 
 
