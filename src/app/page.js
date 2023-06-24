@@ -51,9 +51,9 @@ export default function Home() {
         </Link>
         </div>
         <div>
-        <Link href="/excel">
+        {/* <Link href="/excel">
           <h3 className="text-lg font-sans">Excel Data</h3>
-        </Link>
+        </Link> */}
         </div>
       </header>
 
