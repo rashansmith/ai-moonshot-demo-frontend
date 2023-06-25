@@ -12,6 +12,8 @@ export default function Home() {
   const [sendRequest, setSendRequest ] = useState(false)
   const [data, setData ] = useState('')
   const [submit, setSubmit ] = useState(false)
+  const [loading, setLoading] = useState(false);
+  const [loadingIcon, setLoadingIcon] = useState(false); 
 
   const handleSendMessage = (message) => {
     setMessages((prevMessages) => [...prevMessages, message]);
@@ -26,6 +28,7 @@ export default function Home() {
     setSubmit(true)
     fetchProjectData()
     setDisplayPrompt(prompt)
+    setPrompt('')
 
   };
 
@@ -33,6 +36,8 @@ export default function Home() {
     console.log(prompt)
     if (prompt && tableName) {
       try {
+        setLoading(true); // Set loading state to true before fetching data
+        setLoadingIcon(true); 
         const response = await axios.post('http://localhost:5000/', {
           table_name: tableName,
           prompt: ` ${prompt} `
@@ -41,9 +46,13 @@ export default function Home() {
         console.log(typeof response.data);
         console.log(response);
         setData(response.data);
+        setLoading(false); // Set loading state to false after data fetching
+        setLoadingIcon(false); // 
 
       } catch (error) {
         console.error('Error:', error);
+        setLoading(false); // Set loading state to false in case of error
+        setLoadingIcon(false); //
       }
     }
   };
@@ -136,7 +145,7 @@ return (
       <p>Prompt: {displayPrompt}</p>
     </div>
       <div className="flex pb-6 pt-4 pl-8 overflow-y-scroll bg-gray-500 w-full text-gray-300">
-        <Prompt_Results sendRequest={sendRequest} prompt={prompt} tableName={tableName} data={data} />
+        <Prompt_Results sendRequest={sendRequest} prompt={prompt} tableName={tableName} data={data} loadingIcon={loadingIcon}/>
       </div>
 
       {/* Input and button */}
@@ -145,7 +154,7 @@ return (
           type="text"
           style={{ paddingTop: '14px', paddingBottom: '14px' }}
           className="relative bg-gray-800 border border-gray-700 rounded-md py-2 px-4 w-full text-white"
-          placeholder="Type your message..."
+          placeholder="Enter prompt here..."
           value={prompt} 
           onChange={handlePromptChange} 
         />
