@@ -4,17 +4,14 @@ import Image from 'next/image';
 import styles from "../styles/style.css"
 
 export default function YourComponent({ data, loadingIcon }) {
-  const [dataFrame, setDataFrame] = useState(null);
   const [loading, setLoading] = useState(true);
-  //const [loadingIcon, setLoadingIcon] = useState(false);
-  const [htmlTable, setHtmlTable] = useState('');
 
   useEffect(() => {
     const fetchProjectData = async () => {
       setLoading(true)
       if (data && data.tableName && data.prompt) {
         try {
-          const response = await axios.post('http://localhost:5000/', {
+          const response = await axios.post('/api/flask_pandas_ai', {
             table_name: data.tableName,
             prompt: ` ${data.prompt} `
           });
@@ -25,23 +22,12 @@ export default function YourComponent({ data, loadingIcon }) {
         } catch (error) {
           console.error('Error:', error);
         } finally {
-            setLoading(false); // Set loading state to false regardless of success or error
+            setLoading(false); 
         }
       } 
     };
     fetchProjectData();
   }, [data]);
-
-  const formatValue = (value) => {
-    return JSON.stringify(value);
-  };
-
-  const getImage = (value) => {
-    const new_value = value.image;
-    const imageUrl = `data:image/png,base64,${new_value}`;
-    console.log(imageUrl);
-    return imageUrl;
-  };
 
   // Render the data
   return (
