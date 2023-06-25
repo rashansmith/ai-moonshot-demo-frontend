@@ -46,13 +46,13 @@ export default function YourComponent({ data, loadingIcon }) {
   // Render the data
   return (
     <div>
-    {loading && loadingIcon ? (
+         {loading && loadingIcon ? (
       <div className="loading-circle">
         <div className="spinner"></div>
       </div>
     ) : (
       <>
-        {data && Object.keys(data).length > 0 ? (
+        {data && data !== "" ? (
           typeof data === 'number' || typeof data === 'string' ? (
             <div>{data}</div>
           ) : (
