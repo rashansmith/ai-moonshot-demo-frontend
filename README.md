@@ -29,6 +29,26 @@ npm run dev
 
 The app will be running at [http://localhost:3000](http://localhost:3000) in your browser.
 
+### Running the app using Docker 
+Make sure docker installed and running locally on your machine
+
+First, cd into the project directory
+``` bash
+cd ai-moonshot-demo-frontend 
+```
+
+Build the docker image
+``` bash
+docker build -t <name-of-image> .
+```
+
+Run the docker image
+``` bash
+docker run -p 3000:3000 <name-of-image>
+```
+The app will be running at [http://localhost:3000](http://localhost:3000) in your browser.
+
+
 ## Demo Status:
 Main Page: <img width="1398" alt="updated_ui_page_1" src="https://github.com/rashansmith/ai-moonshot-demo-frontend/assets/6632748/9a52d0c9-666e-43d8-ac49-2bbe4ed8ef40">
 
