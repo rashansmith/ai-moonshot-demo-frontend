@@ -1,7 +1,6 @@
 'use client'
-import Link from 'next/link';
 import Prompt_Results from './components/Pandas_AI';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
 import Image from 'next/image'
 
@@ -102,7 +101,7 @@ return (
             </button>
           </div>
           <div className="mt-28 mb-24 grid text-center lg:mb-0 lg:grid-cols-3 lg:text-left">
-            <div className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30">
+            <div className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300  hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30">
               <h2 className="mb-3 text-2xl font-semibold text-center">
                 Data Insights
                 <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none"></span>
@@ -111,7 +110,7 @@ return (
                 Add data science questions about the UNDP Energy portfolio or country-level statistics and generate analysis, tables, and graphs
               </p>
             </div>
-            <div className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800 hover:dark:bg-opacity-30">
+            <div className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300  hover:dark:border-neutral-700 hover:dark:bg-neutral-800 hover:dark:bg-opacity-30">
               <h2 className="mb-3 text-2xl font-semibold text-center">
                 Personalized answers
                 <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none"></span>
@@ -120,7 +119,7 @@ return (
                 Answers are based on your unique questions, and our vast database of information.
               </p>
             </div>
-            <div className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30">
+            <div className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300  hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30">
               <h2 className="mb-3 text-2xl font-semibold text-center">
                 Generative Text
                 <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none"></span>

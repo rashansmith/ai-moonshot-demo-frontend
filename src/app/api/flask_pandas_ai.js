@@ -5,7 +5,6 @@ export default async function handler(req, res) {
 
     if (req.method === 'POST') {
       const { table_name, prompt } = req.body;
-  
 
       try {
         const response = await axios.post('http://localhost:5000/', {
