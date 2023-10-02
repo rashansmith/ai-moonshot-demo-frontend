@@ -7,7 +7,7 @@ export default async function handler(req, res) {
       const { table_name, prompt } = req.body;
 
       try {
-        const response = await axios.post('http://localhost:5000/', {
+        const response = await axios.post('http://backend:5000/', {
           table_name,
           // prompt: ` ${prompt} `
           prompt: prompt
