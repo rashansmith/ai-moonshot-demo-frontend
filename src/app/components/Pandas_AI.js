@@ -40,7 +40,7 @@ export default function YourComponent({ data, loadingIcon }) {
       <>
         {data && data !== "" ? (
           typeof data === 'number' || typeof data === 'string' ? (
-            <pre>{data}</pre>
+            <pre className="text-wrapper">{data}</pre>
           ) : (
             <div>
               {typeof data === 'object' && !data.image ? (
