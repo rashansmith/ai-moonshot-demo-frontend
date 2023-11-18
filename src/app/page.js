@@ -3,6 +3,7 @@ import Prompt_Results from './components/Pandas_AI';
 import { useState } from 'react';
 import axios from 'axios';
 import Image from 'next/image'
+import './styles/style.css'; 
 
 export default function Home() {
   const [prompt, setPrompt] = useState('')
@@ -13,6 +14,9 @@ export default function Home() {
   const [submit, setSubmit ] = useState(false)
   const [loading, setLoading] = useState(false);
   const [loadingIcon, setLoadingIcon] = useState(false); 
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [endPointSelection, setEndpointSelection] = useState('pandasai')
+
 
   const handleSendMessage = (message) => {
     setMessages((prevMessages) => [...prevMessages, message]);
@@ -32,33 +36,103 @@ export default function Home() {
   };
 
   const fetchProjectData = async () => {
-    console.log(prompt)
-    if (prompt && tableName) {
-      try {
-        setLoading(true); // Set loading state to true before fetching data
-        setLoadingIcon(true); 
-        const response = await axios.post('http://localhost:5000/', {
-          table_name: tableName,
-          prompt: ` ${prompt} `
-        });
+    console.log(endPointSelection)
+    try {
+      setLoading(true); // Set loading state to true before fetching data
+      setLoadingIcon(true); 
+      const response = await axios.post(`http://localhost:5000/${endPointSelection}`, {
+        table_name: tableName,
+        prompt: ` ${prompt} `
+      });
 
-        console.log(typeof response.data);
-        console.log(response);
+      //console.log(typeof response.data);
+      console.log(response);
+      console.log(response.data.answer)
+
+      if(response.data.answer !== undefined) {
+        setData(response.data.answer);
+      } else {
         setData(response.data);
-        setLoading(false); // Set loading state to false after data fetching
-        setLoadingIcon(false); // 
-
-      } catch (error) {
-        console.error('Error:', error);
-        setLoading(false); // Set loading state to false in case of error
-        setLoadingIcon(false); //
       }
+
+      setLoading(false); // Set loading state to false after data fetching
+      setLoadingIcon(false); // 
+
+    } catch (error) {
+      console.error('Error:', error);
+      setLoading(false); // Set loading state to false in case of error
+      setLoadingIcon(false); //
     }
   };
 
+  const onChangeTableName = (event) => {
+    setTableName(event.target.value);
+    // return (
+    //   <div className="text-green">Changes have been saved.</div>
+    // )
+  }
+
+  const onChangeEndpoint = (event) => {
+    setEndpointSelection(event.target.value);
+  }
+
+  const PopupForm = ({ onClose }) => {
+    return (
+      <div className="fixed z-50 h-full bg-gray-600 bg-opacity-80 overflow-y-auto w-full flex justify-center items-center">
+          <div className="bg-white p-5 rounded-lg shadow-lg h-1/2 w-1/3">
+        <form>
+          {/* Form content here */}
+          <div className=" text-xl font-bold text-gray-700 pb-10 ">Settings</div>
+          <div className="mb-4">
+            <label htmlFor="table_name" className="block text-gray-700 text-sm font-bold mb-2">
+              Table Name:
+            </label>
+            <input
+              type="text"
+              name="table_name"
+              id="table_name"
+              value={tableName}
+              onChange={onChangeTableName}
+              className="block w-full px-3 py-2 text-black bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm dropdown-arrow"
+            />
+          </div>
+          <div className="mb-4">
+            <label htmlFor="table_name" className="block text-gray-700 text-sm font-bold mb-2">
+              Endpoint Selection:
+            </label>
+            <select
+              name="endPointSelection"
+              id="endPointSelection"
+              value={endPointSelection}
+              onChange={onChangeEndpoint}
+              className="block w-full px-3 py-2 text-black bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm dropdown-arrow"
+            >
+              <option selected value="pandasai">PandasAI Data Analysis</option>
+              <option value="llm">Semantic Search and Response Generation</option>
+
+              {/* etc. */}
+            </select>
+          </div>
+          <div className="relative bottom-0 left-0 flex">
+            {/* <button type="submit" className="text-white bg-green-700 rounded-md p-2">
+              Submit
+            </button> */}
+            <button type="button" className="text-white bg-gray-500 rounded-md p-2 mr-2 mt-6" onClick={onClose}>
+              Close
+            </button>
+            <div></div>
+          </div>
+        </form>
+        </div>
+      </div>
+    );
+  };
+
+  
+
 return (
   <div className="bg-neutral-800 min-h-screen">
-
+    {isPopupOpen && <PopupForm onClose={() => setIsPopupOpen(false)} />}
     {submit === false ? (
       <div>
           <header className="fixed top-0 w-full pl-8 pr-8 flex justify-between">
@@ -76,11 +150,14 @@ return (
                 priority
               />
             </a>
-            
+            <div className="fixed top-0 right-0 flex">
+              {/* <a href="/"><div className="text-white text-md mt-2 mb-18 pt-16 pb-2 pr-14 pl-3">Prompt Ideas</div></a> */}
+              <button onClick={() => setIsPopupOpen(true)}><div className="text-white text-md mt-2 mb-18 pt-16 pb-2 pr-14 pl-3">Settings</div></button>
+            </div>
           </div>
         </header>
 
-      <div className="flex flex-col items-center justify-center bg-neutral-800 h-screen text-white">
+      <div className="flex flex-col items-center justify-center bg-neutral-800 h-max-screen pb-20 text-white">
         <main className="flex min-h-screen flex-col items-center justify-between pb-24">
           <div className="mb-12">
             <div className="text-white text-center text-3xl pb-4 pt-32">Welcome to the</div>
@@ -181,7 +258,10 @@ return (
       />
     </a>
     <div className="text-white text-3xl mt-2 mb-18 pt-10 pb-2 pr-3 pl-20">Energy Moonshot AI</div>
-    <div className="fixed top-0 right-0 text-white text-md mt-2 mb-18 pt-16 pb-2 pr-14 pl-3">Prompt Ideas</div>
+    <div className="fixed top-0 right-0 flex">
+              {/* <a href="/"><div className="text-white text-md mt-2 mb-18 pt-16 pb-2 pr-14 pl-3">Prompt Ideas</div></a> */}
+              <button onClick={() => setIsPopupOpen(true)}><div className="text-white text-md mt-2 mb-18 pt-16 pb-2 pr-14 pl-3">Settings</div></button>
+    </div>
 </header>
   </div>
 </div>
