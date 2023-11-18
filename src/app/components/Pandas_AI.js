@@ -6,28 +6,28 @@ import styles from "../styles/style.css"
 export default function YourComponent({ data, loadingIcon }) {
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const fetchProjectData = async () => {
-      setLoading(true)
-      if (data && data.tableName && data.prompt) {
-        try {
-          const response = await axios.post('/api/flask_pandas_ai', {
-            table_name: data.tableName,
-            prompt: ` ${data.prompt} `
-          });
+  // useEffect(() => {
+  //   const fetchProjectData = async () => {
+  //     setLoading(true)
+  //     if (data && data.tableName && data.prompt) {
+  //       try {
+  //         const response = await axios.post('/api/flask_pandas_ai', {
+  //           table_name: data.tableName,
+  //           prompt: ` ${data.prompt} `
+  //         });
 
-          console.log(typeof response.data);
-          console.log(response);
+  //         console.log(typeof response.data);
+  //         console.log(response);
 
-        } catch (error) {
-          console.error('Error:', error);
-        } finally {
-            setLoading(false); 
-        }
-      } 
-    };
-    fetchProjectData();
-  }, [data]);
+  //       } catch (error) {
+  //         console.error('Error:', error);
+  //       } finally {
+  //           setLoading(false); 
+  //       }
+  //     } 
+  //   };
+  //   fetchProjectData();
+  // }, [data]);
 
   // Render the data
   return (
@@ -40,7 +40,7 @@ export default function YourComponent({ data, loadingIcon }) {
       <>
         {data && data !== "" ? (
           typeof data === 'number' || typeof data === 'string' ? (
-            <div>{data}</div>
+            <pre>{data}</pre>
           ) : (
             <div>
               {typeof data === 'object' && !data.image ? (
